@@ -23,9 +23,10 @@ private:
     int  serverPort;
     struct  sockaddr_in serverAddr;
     socklen_t           addrLen = sizeof(struct sockaddr_in);
-    int key;
+    int key;    
 
 public:
+    std::vector<unsigned char> buffer;
     Receiver(int argc, char** argv);
     ~Receiver();
     void waitConnection();

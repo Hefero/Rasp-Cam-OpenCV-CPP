@@ -12,6 +12,9 @@
 
 using namespace cv;
 
+int capDev = 0;
+VideoCapture cap(capDev); // open the default camera
+
 int main(int argc, char** argv)
 {
     if (argc < 3) {
@@ -19,14 +22,24 @@ int main(int argc, char** argv)
     }
     
     Transmitter rec(argc, argv);
-    vector<unsigned char> vc;
-    vc.assign(100,123);
+
+    Mat img, imgGray;
+    img = Mat::zeros(480 , 640, CV_8UC3);
+     //make it continuous
+    if (!img.isContinuous()) {
+        img = img.clone();
+    }
+    int imgSize = img.total() * img.elemSize();
+    vector<unsigned char> vb;
+    vector<int> param{CV_IMWRITE_JPEG_QUALITY,80};    
     
     while(1){
-        rec.sendBytes(vc);
+        cap >> img;
+        imencode(".jpg",img,vb,param);
+        rec.sendBytes(vb);
         int bytesRec;
         rec.recvInt(bytesRec);
-        std::cout << "Receveid confirmation of bytes: " << bytesRec << std::endl;
+        std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
     }
 
     return 0;

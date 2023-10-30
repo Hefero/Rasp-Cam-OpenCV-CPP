@@ -4,21 +4,16 @@
 void Receiver::waitConnection() 
 {
     int bytes = 0;
-    int recInt;
-    while (key != 'q') {        
-        
-        // recvInt        
-        if (bytes = recvInt(recInt) > 0) {
-            std::vector<unsigned char> buffer(recInt);
-            int result = recvBytes(buffer, recInt);
-            if (result == recInt) {                
-                std::cout << "received bytes = " << (int)buffer[0] << " size:" << result << std::endl;
-                sendInt(recInt);              
-            } else {
-            // Handle error
-            }
+    int recInt; 
+    if (bytes = recvInt(recInt) > 0) {
+        buffer.resize(recInt);
+        int result = recvBytes(buffer, recInt);
+        if (result == recInt) {                
+            std::cout << "received bytes = " << (int)buffer[0] << " size:" << result << std::endl;
+            sendInt(recInt);              
+        } else {
+        // Handle error
         }
-        if (key = cv::waitKey(10) >= 0) break;
     }
 }
 
