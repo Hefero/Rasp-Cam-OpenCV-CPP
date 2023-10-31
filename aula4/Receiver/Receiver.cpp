@@ -1,20 +1,22 @@
 #include "Receiver.h"
 
 
-void Receiver::waitConnection() 
+int Receiver::waitConnection() 
 {
     int bytes = 0;
-    int recInt; 
+    int recInt = 0; 
     if (bytes = recvInt(recInt) > 0) {
         buffer.resize(recInt);
         int result = recvBytes(buffer, recInt);
         if (result == recInt) {                
             std::cout << "received bytes = " << (int)buffer[0] << " size:" << result << std::endl;
-            sendInt(recInt);              
+            sendInt(recInt);
+            return result;       
         } else {
-        // Handle error
+            return -1;
         }
     }
+    return recInt;
 }
 
 Receiver::Receiver(int argc, char** argv)

@@ -29,7 +29,7 @@ public:
     std::vector<unsigned char> buffer;
     Receiver(int argc, char** argv);
     ~Receiver();
-    void waitConnection();
+    int waitConnection();
     int sendInt(int value);
     int sendMat(Mat img);
     int sendBytes(vector<unsigned char> compressed);
