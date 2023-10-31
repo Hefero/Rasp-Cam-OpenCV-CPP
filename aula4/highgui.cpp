@@ -3,6 +3,14 @@
 #include <opencv2/opencv.hpp>
 #include "cekeikon.h"
 using namespace cv;
+
+
+int capDev = 0;
+VideoCapture cap(capDev); // open the default camera
+
+
+
+
 struct Mouse {
  bool clicou=true;
  int x,y;
@@ -99,23 +107,34 @@ int main()
  Botao b7(Point(470, 60),Point(560,160),"");
  Botao b8(Point(470,180),Point(560,280),"");
  Botao b9(Point(470,300),Point(560,410),"");
- 
- 
 
+ Mat img, concatImg;
+img = Mat::zeros(480 , 640, CV_8UC3);
+concatImg = Mat::zeros(480+480 , 640, CV_8UC3);
+    //make it continuous
+if (!img.isContinuous()) {
+    img = img.clone();
+}
+ 
+ 
+    
  while (waitKey(30)<0) {
- if (mouse.clicou) {
- b1.testaDesenha(a,mouse);
- b2.testaDesenha(a,mouse);
- b3.testaDesenha(a,mouse);
- b4.testaDesenha(a,mouse);
- b5.testaDesenha(a,mouse);
- b6.testaDesenha(a,mouse);
- b7.testaDesenha(a,mouse);
- b8.testaDesenha(a,mouse);
- b9.testaDesenha(a,mouse);
- desenhaFlechas(a);
- imshow("janela",a);
- mouse.clicou=false;
- }
+    cap >> img;
+    
+    concatImg = grudaH(a,img);        
+    imshow("janela",concatImg);
+    if (mouse.clicou) {
+        b1.testaDesenha(a,mouse);
+        b2.testaDesenha(a,mouse);
+        b3.testaDesenha(a,mouse);
+        b4.testaDesenha(a,mouse);
+        b5.testaDesenha(a,mouse);
+        b6.testaDesenha(a,mouse);
+        b7.testaDesenha(a,mouse);
+        b8.testaDesenha(a,mouse);
+        b9.testaDesenha(a,mouse);
+        desenhaFlechas(a);
+        mouse.clicou=false;
+    }
  }
 }
