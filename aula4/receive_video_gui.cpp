@@ -9,9 +9,13 @@ Mygui gui;
 void onMouseGui(int event, int x, int y, int flags, void* userdata)
 { 
     Mouse* mouse=(Mouse*)userdata;
-    if (event==EVENT_LBUTTONDOWN || event==EVENT_LBUTTONUP) {
-        (*mouse).clicou=true; (*mouse).x=x; (*mouse).y=y;
+    if (event==EVENT_LBUTTONDOWN) {
+        (*mouse).clicou=true; (*mouse).x=x; (*mouse).y=y;  (*mouse).up=false;
     }
+    if (event==EVENT_LBUTTONUP) {
+        (*mouse).clicou=true; (*mouse).x=x; (*mouse).y=y; (*mouse).up=true;
+    }
+    
 }
 
 int main(int argc, char** argv)

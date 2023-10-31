@@ -9,6 +9,7 @@ using namespace cv;
 struct Mouse {
     bool clicou=true;
     int x,y;
+    bool up=true;
 };
 
 class Botao
