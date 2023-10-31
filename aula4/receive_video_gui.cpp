@@ -30,8 +30,8 @@ setMouseCallback("janela", onMouseGui, &gui.mouse);
         try{
             img = imdecode(rec.buffer,1);
         }
-        catch{
-            
+        catch(exception ex){
+            continue;
         }
     }
     concatImg = grudaH(gui.a,img);
