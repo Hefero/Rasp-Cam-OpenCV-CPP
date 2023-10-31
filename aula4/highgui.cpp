@@ -1,6 +1,7 @@
 //Lampada08.cpp
 //Cria classe Mouse.
 #include <opencv2/opencv.hpp>
+#include "cekeikon.h"
 using namespace cv;
 struct Mouse {
  bool clicou=true;
@@ -11,6 +12,36 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
  if (event==EVENT_LBUTTONDOWN || event==EVENT_LBUTTONUP) {
  (*mouse).clicou=true; (*mouse).x=x; (*mouse).y=y;
  } 
+}
+
+void desenhaFlechas(Mat_<Vec3b>& a){
+    flecha(a, 140, 140, 90, 90, COR(255,0,0),5);
+    //Botao b1(Point(70, 60),Point(160,160),"");
+
+    flecha(a, 230, 140, 230, 90, COR(255,0,0),5);
+    //Botao b3(Point(70,180),Point(160,280),"");
+
+    flecha(a, 320, 140, 380, 90, COR(255,0,0),5);
+    //Botao b5(Point(70,300),Point(160,410),"");
+    
+    flecha(a, 135, 315, 75, 315, COR(255,0,0),5);
+    //Botao b2(Point(270, 60),Point(360,160),""); 
+
+    //flecha(a, 140, 140, 90, 90, COR(255,0,0),5);
+    //Botao b4(Point(270,180),Point(360,280),""); 
+
+    flecha(a, 315, 315, 390, 315, COR(255,0,0),5);
+    //Botao b6(Point(270,300),Point(360,410),"");
+
+    flecha(a, 140, 490, 90, 540, COR(255,0,0),5);
+    //Botao b7(Point(470, 60),Point(560,160),"");
+
+    flecha(a, 230, 490, 230, 540, COR(255,0,0),5);
+    //Botao b8(Point(470,180),Point(560,280),"");
+
+    flecha(a, 320, 490, 380, 540, COR(255,0,0),5);
+    //Botao b9(Point(470,300),Point(560,410),"");
+     
 }
 class Botao {
  public:
@@ -30,18 +61,18 @@ void Botao::testaDesenha(Mat_<Vec3b>& a, Mouse mouse)
  if (ligado) {
  ligado=false;
  rectangle(a, p,q, Scalar(192,192,192), CV_FILLED);
- line(a, p, Point(p.x,q.y), Scalar(255,255,255), 4);
- line(a, p, Point(q.x,p.y), Scalar(255,255,255), 4);
- line(a, q, Point(p.x,q.y), Scalar(0,0,0), 4);
- line(a, q, Point(q.x,p.y), Scalar(0,0,0), 4);
+ line(a, p, Point(p.x,q.y), Scalar(255,255,255), 0);
+ line(a, p, Point(q.x,p.y), Scalar(255,255,255), 0);
+ line(a, q, Point(p.x,q.y), Scalar(0,0,0), 0);
+ line(a, q, Point(q.x,p.y), Scalar(0,0,0), 0); 
  putText(a, st0, Point(p.x+5,(p.y+q.y)/2), FONT_HERSHEY_SIMPLEX, 1, Scalar(0,0,0), 2);
  } else {
  ligado=true;
  rectangle(a, p,q, Scalar(128,255,255), CV_FILLED);
- line(a, p, Point(p.x,q.y), Scalar(0,0,0), 4);
- line(a, p, Point(q.x,p.y), Scalar(0,0,0), 4);
- line(a, q, Point(p.x,q.y), Scalar(255,255,255), 4);
- line(a, q, Point(q.x,p.y), Scalar(255,255,255), 4);
+ line(a, p, Point(p.x,q.y), Scalar(0,0,0), 0);
+ line(a, p, Point(q.x,p.y), Scalar(0,0,0), 0);
+ line(a, q, Point(p.x,q.y), Scalar(255,255,255), 0);
+ line(a, q, Point(q.x,p.y), Scalar(255,255,255), 0);
  putText(a, st1, Point(p.x+5,(p.y+q.y)/2), FONT_HERSHEY_SIMPLEX, 1, Scalar(0,0,0), 2);
  }
  primeiraVez=false;
@@ -55,18 +86,21 @@ int main()
  Mouse mouse;
  setMouseCallback("janela", onMouse, &mouse);
  imshow("janela",a);
- Botao b1(Point(70, 60),Point(160,160),"BO1");
- Botao b3(Point(70,180),Point(160,280),"BO3");
- Botao b5(Point(70,300),Point(160,410),"BO5");
+ //⇐⇑⇒⇓⇖⇗⇘⇙
+ Botao b1(Point(70, 60),Point(160,160),"");
+ Botao b3(Point(70,180),Point(160,280),"");
+ Botao b5(Point(70,300),Point(160,410),"");
 
- Botao b2(Point(270, 60),Point(360,160),"BO2"); 
- Botao b4(Point(270,180),Point(360,280),"BO4"); 
- Botao b6(Point(270,300),Point(360,410),"BO6");
+ Botao b2(Point(270, 60),Point(360,160),""); 
+ Botao b4(Point(270,180),Point(360,280),""); 
+ Botao b6(Point(270,300),Point(360,410),"");
 
 
- Botao b7(Point(470, 60),Point(560,160),"BO7");
- Botao b8(Point(470,180),Point(560,280),"BO8");
- Botao b9(Point(470,300),Point(560,410),"BO9");
+ Botao b7(Point(470, 60),Point(560,160),"");
+ Botao b8(Point(470,180),Point(560,280),"");
+ Botao b9(Point(470,300),Point(560,410),"");
+ 
+ 
 
  while (waitKey(30)<0) {
  if (mouse.clicou) {
@@ -79,6 +113,7 @@ int main()
  b7.testaDesenha(a,mouse);
  b8.testaDesenha(a,mouse);
  b9.testaDesenha(a,mouse);
+ desenhaFlechas(a);
  imshow("janela",a);
  mouse.clicou=false;
  }
