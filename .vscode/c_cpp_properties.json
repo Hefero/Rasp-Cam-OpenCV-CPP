@@ -17,6 +17,7 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-msvc-x64",
             "compilerArgs": [
+                "-g",
                 "-fmax-errors=2",
                 "-l opencv_calib3d2410.dll",
                 "-l opencv_contrib2410.dll",
@@ -54,6 +55,7 @@
             "cppStandard": "gnu++14",
             "intelliSenseMode": "${default}",
             "compilerArgs": [
+                "-g",
                 "-std=gnu++14",
                 "-fmax-errors=2",
                 "-L/home/psi3422/cekeikon5/opencv2cpu/lib",

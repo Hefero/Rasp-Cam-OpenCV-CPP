@@ -26,17 +26,17 @@ setMouseCallback("janela", onMouseGui, &gui.mouse);
 int key = 0;
     
  while (key != 'q') {
-    gui.guiLoop();    
-    if (rec.waitConnection() > 0){
-        try{
+    try{
+        gui.guiLoop();    
+        if (rec.waitConnection() > 0){
             img = imdecode(rec.buffer,1);
         }
-        catch(exception ex){
-            continue;
-        }
+        concatImg = grudaH(gui.a,img);
+        imshow("janela",concatImg);
     }
-    concatImg = grudaH(gui.a,img);
-    imshow("janela",concatImg);
+    catch(cv::Exception ex){
+            continue;
+    }
     if (key = cv::waitKey(1) >= 0) break;
  }
 }

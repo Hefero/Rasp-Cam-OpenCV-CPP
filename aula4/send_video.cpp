@@ -28,13 +28,19 @@ int main(int argc, char** argv)
     vector<unsigned char> vb;
     vector<int> param{CV_IMWRITE_JPEG_QUALITY,80};    
     
-    while(1){
-        cap >> img;
-        imencode(".jpg",img,vb,param);
-        rec.sendBytes(vb);
-        int bytesRec;
-        rec.recvInt(bytesRec);
-        std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
+    while(1){        
+        try{
+            cap >> img;
+            imencode(".jpg",img,vb,param);
+            rec.sendBytes(vb);
+            int bytesRec;
+            rec.recvInt(bytesRec);
+            std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
+        }
+        catch(cv::Exception ex){
+            std::cout << "encoding error " << ex.msg << std::endl;
+            continue;
+        }
     }
 
     return 0;
