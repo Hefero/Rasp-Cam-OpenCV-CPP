@@ -6,6 +6,7 @@
 
 #include "opencv2/opencv.hpp"
 #include <sys/socket.h> 
+#include <chrono>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "Transmitter/Transmitter.cpp"
@@ -21,6 +22,10 @@ int main(int argc, char** argv)
            std::cerr << "Usage: cv_video_cli <serverIP> <serverPort> " << std::endl;
     }
     
+    auto start = std::chrono::high_resolution_clock::now();
+    auto end = std::chrono::high_resolution_clock::now();
+
+
     Transmitter rec(argc, argv);
 
     Mat img;
@@ -35,7 +40,17 @@ int main(int argc, char** argv)
             rec.sendBytes(vb);
             int bytesRec;
             rec.recvInt(bytesRec);
-            std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
+            if (bytesRec == vb.size()){
+                start = std::chrono::high_resolution_clock::now();
+                std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
+            }
+            end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> duration = end - start;
+            if(duration.count() > 3){
+                std::cout << "Lost Connection: " << bytesRec << std::endl;
+                rec = Transmitter(argc, argv);
+            }
+
         }
         catch(cv::Exception ex){
             std::cout << "encoding error " << ex.msg << std::endl;

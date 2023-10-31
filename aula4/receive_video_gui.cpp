@@ -2,6 +2,7 @@
 #include "Mygui/Mygui.cpp"
 #include <opencv2/opencv.hpp>
 #include "cekeikon.h"
+#include <chrono>
 #include "Receiver/Receiver.cpp"
 
 Mygui gui;
@@ -28,12 +29,23 @@ Mat concatImg = Mat::zeros(480+480 , 640, CV_8UC3);
 namedWindow("janela");
 setMouseCallback("janela", onMouseGui, &gui.mouse);
 int key = 0;
+
+auto start = std::chrono::high_resolution_clock::now();
+auto end = std::chrono::high_resolution_clock::now();
+
     
  while (key != 'q') {
     try{
         gui.guiLoop();    
         if (rec.waitConnection() > 0){
             img = imdecode(rec.buffer,1);
+            start = std::chrono::high_resolution_clock::now();
+        }
+        end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        if(duration.count() > 3){
+            std::cout << "Lost Connection: " << std::endl;
+            rec = Receiver(argc, argv);
         }
         concatImg = grudaH(gui.a,img);
         imshow("janela",concatImg);
