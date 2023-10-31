@@ -23,13 +23,8 @@ int main(int argc, char** argv)
     
     Transmitter rec(argc, argv);
 
-    Mat img, imgGray;
+    Mat img;
     img = Mat::zeros(480 , 640, CV_8UC3);
-     //make it continuous
-    if (!img.isContinuous()) {
-        img = img.clone();
-    }
-    int imgSize = img.total() * img.elemSize();
     vector<unsigned char> vb;
     vector<int> param{CV_IMWRITE_JPEG_QUALITY,80};    
     

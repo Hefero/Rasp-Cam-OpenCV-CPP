@@ -23,8 +23,9 @@ Mat concatImg = Mat::zeros(480+480 , 640, CV_8UC3);
 
 namedWindow("janela");
 setMouseCallback("janela", onMouseGui, &gui.mouse);
+int key = 0;
     
- while (waitKey(30)<0) {
+ while (key != 'q') {
     gui.guiLoop();    
     if (rec.waitConnection() > 0){
         try{
@@ -36,5 +37,6 @@ setMouseCallback("janela", onMouseGui, &gui.mouse);
     }
     concatImg = grudaH(gui.a,img);
     imshow("janela",concatImg);
+    if (key = cv::waitKey(1) >= 0) break;
  }
 }
