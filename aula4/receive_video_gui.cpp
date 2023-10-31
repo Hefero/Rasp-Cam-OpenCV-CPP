@@ -27,7 +27,12 @@ setMouseCallback("janela", onMouseGui, &gui.mouse);
  while (waitKey(30)<0) {
     gui.guiLoop();    
     if (rec.waitConnection() > 0){
-        img = imdecode(rec.buffer,1);
+        try{
+            img = imdecode(rec.buffer,1);
+        }
+        catch{
+            
+        }
     }
     concatImg = grudaH(gui.a,img);
     imshow("janela",concatImg);
