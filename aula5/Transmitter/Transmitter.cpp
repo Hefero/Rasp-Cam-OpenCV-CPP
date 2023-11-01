@@ -1,5 +1,48 @@
 #include "Transmitter.h"
 
+int Transmitter::waitConnection() 
+{
+    int bytes = 0;
+    int recInt = 0;
+    int bytesSize = 0;
+    int stringSize = 0;
+    if (bytes = recvInt(recInt) > 0) {
+        //std::cout << "received int = " << recInt << std::endl;
+        switch(recInt) 
+        {
+        case 594631: // bytes
+            if (int recBytes = recvInt(bytesSize) > 0) {
+                //buffer.resize(bytesSize);
+                int result = recvBytes(buffer, bytesSize);
+                if (result == bytesSize) {                
+                    std::cout << "received number of bytes: " << result << std::endl;
+                    //sendInt(bytesSize); //send confirmation of received
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+         case 866685: // string
+            if (int recString = recvInt(stringSize) > 0) {
+                string command;                
+                int result = recvString(command, stringSize);
+                if (result == stringSize) {                
+                    std::cout << "received command: " << command << std::endl;
+                    //sendInt(stringSize); //send confirmation of received
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    return recInt;
+}
+
 Transmitter::Transmitter(int argc, char** argv)
 {
     
@@ -68,14 +111,32 @@ int Transmitter::sendMat(Mat img){
     return send(remoteSocket, img.data, img.total() * img.elemSize(), MSG_WAITALL); 
 }
 int Transmitter::sendBytes(vector<unsigned char> compressed){
+    sendInt(594631);
     sendInt(compressed.size());
     return send(remoteSocket, compressed.data(), compressed.size(), MSG_WAITALL); 
 }
-int Transmitter::sendString(string send){
-    return send(remoteSocket, &send, sizeof(send), MSG_WAITALL); 
+int Transmitter::sendString(string dataToSend){
+    sendInt(866685);    
+    sendInt(dataToSend.size());
+    return send(remoteSocket,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
+                                                            
 }
-int Transmitter::recvString(string& stor){
-    return recv(remoteSocket, &stor, sizeof stor, MSG_WAITALL);
+int Transmitter::recvString(string& storage, int size){
+    const unsigned int MAX_BUF_LENGTH = 4096;
+    std::vector<char> buffer(MAX_BUF_LENGTH);
+    string receivedString;
+    int bytesReceived = 0;
+    do {
+        bytesReceived = recv(remoteSocket, &buffer[0], buffer.size(), 0);
+        // append string from buffer.
+        if ( bytesReceived == -1 ) { 
+            // error 
+        } else {
+            receivedString.append( buffer.cbegin(), buffer.cend() );
+        }
+    } while ( bytesReceived == MAX_BUF_LENGTH );
+    storage = receivedString;
+    return bytesReceived; 
 }
 
 int Transmitter::recvInt(int& storage){

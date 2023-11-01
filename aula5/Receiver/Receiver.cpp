@@ -4,16 +4,41 @@
 int Receiver::waitConnection() 
 {
     int bytes = 0;
-    int recInt = 0; 
+    int recInt = 0;
+    int bytesSize = 0;
+    int stringSize = 0;
     if (bytes = recvInt(recInt) > 0) {
-        buffer.resize(recInt);
-        int result = recvBytes(buffer, recInt);
-        if (result == recInt) {                
-            std::cout << "received bytes = " << (int)buffer[0] << " size:" << result << std::endl;
-            sendInt(recInt);
-            return result;       
-        } else {
-            return -1;
+        //std::cout << "received int = " << recInt << std::endl;
+        switch(recInt) 
+        {
+        case 594631: // bytes
+            if (int recBytes = recvInt(bytesSize) > 0) {
+                //buffer.resize(bytesSize);
+                int result = recvBytes(buffer, bytesSize);
+                if (result == bytesSize) {                
+                    std::cout << "received number of bytes: " << result << std::endl;
+                    //sendInt(bytesSize); //send confirmation of received
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+         case 866685: // string
+            if (int recString = recvInt(stringSize) > 0) {
+                string command;                
+                int result = recvString(command, stringSize);
+                if (result == stringSize) {                
+                    std::cout << "received command: " << command << std::endl;
+                    //sendInt(stringSize); //send confirmation of received
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+        default:
+            break;
         }
     }
     return recInt;
@@ -56,14 +81,32 @@ int Receiver::sendMat(Mat img){
     return send(sokt, img.data, img.total() * img.elemSize(), MSG_WAITALL); 
 }
 int Receiver::sendBytes(vector<unsigned char> compressed){
+    sendInt(594631);
     sendInt(compressed.size());
     return send(sokt, compressed.data(), compressed.size(), MSG_WAITALL); 
 }
-int Receiver::sendString(string value){
-    return send(sokt, &value, sizeof(value), MSG_WAITALL); 
+int Receiver::sendString(string dataToSend){
+    sendInt(866685);    
+    sendInt(dataToSend.size());
+    return send(sokt,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
+                                                            
 }
-int Receiver::recvString(string& stor){
-    return recv(sokt, &stor, sizeof stor, MSG_WAITALL);
+int Receiver::recvString(string& storage, int size){
+    const unsigned int MAX_BUF_LENGTH = 4096;
+    std::vector<char> buffer(MAX_BUF_LENGTH);
+    string receivedString;
+    int bytesReceived = 0;
+    do {
+        bytesReceived = recv(sokt, &buffer[0], buffer.size(), 0);
+        // append string from buffer.
+        if ( bytesReceived == -1 ) { 
+            // error 
+        } else {
+            receivedString.append( buffer.cbegin(), buffer.cend() );
+        }
+    } while ( bytesReceived == MAX_BUF_LENGTH );
+    storage = receivedString;
+    return bytesReceived; 
 }
 int Receiver::recvInt(int& storage){
     return recv(sokt, &storage, sizeof storage, MSG_WAITALL);
