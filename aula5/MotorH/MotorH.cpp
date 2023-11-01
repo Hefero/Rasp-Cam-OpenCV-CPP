@@ -1,4 +1,6 @@
 #include "MotorH.h"
+#include <ostream>
+
 
 #define velDir 0.00568f
 #define velEsq 0.0068f
