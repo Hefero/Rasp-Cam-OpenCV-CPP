@@ -47,7 +47,7 @@ Transmitter::Transmitter(int argc, char** argv)
       //std::cout << remoteSocket<< "32"<< std::endl;
     if (remoteSocket < 0) {
         perror("accept failed!");
-        exit(1);
+        //exit(1);
     } 
     std::cout << "Connection accepted" << std::endl;
     //pthread_create(&thread_id,NULL,display,&remoteSocket);
@@ -86,7 +86,39 @@ bool Transmitter::closeSocket(){
     setsockopt(remoteSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     close(localSocket);
     close(remoteSocket);
-    return true;
+    localSocket = socket(AF_INET , SOCK_STREAM , 0);
+    if (localSocket == -1){
+         perror("socket() call failed!!");
+    }    
+
+    localAddr.sin_family = AF_INET;
+    localAddr.sin_addr.s_addr = INADDR_ANY;
+    localAddr.sin_port = htons( port );
+
+    if( bind(localSocket,(struct sockaddr *)&localAddr , sizeof(localAddr)) < 0) {
+         perror("Can't bind() socket");
+         exit(1);
+    }
+
+    //Listening
+    listen(localSocket , 3);
+
+    std::cout <<  "Waiting for connections...\n"
+              <<  "Server Port:" << port << std::endl;
+
+    //accept connection from an incoming client
+    //while(1){
+    //if (remoteSocket < 0) {
+    //    perror("accept failed!");
+    //    exit(1);
+    //}
+
+     remoteSocket = accept(localSocket, (struct sockaddr *)&remoteAddr, (socklen_t*)&addrLen);  
+      //std::cout << remoteSocket<< "32"<< std::endl;
+    if (remoteSocket < 0) {
+        perror("accept failed!");
+        //exit(1);
+    }     
     return true;
 }
 // Transmitter constructor
