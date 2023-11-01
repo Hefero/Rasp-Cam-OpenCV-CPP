@@ -46,10 +46,8 @@ int main(int argc, char** argv)
             int bytesCommand = rec.recvString(command);
             if(bytesCommand > 0){
                 std::cout << "receive command" << command << std::endl;
-                motorH.execute(command);
+                motorH->execute(command);
             }
-            
-            motorH.execute(command);
         }
         catch(cv::Exception ex){
             std::cout << "encoding error " << ex.msg << std::endl;
