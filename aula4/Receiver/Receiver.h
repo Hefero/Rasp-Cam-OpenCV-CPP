@@ -30,6 +30,7 @@ public:
     Receiver(int argc, char** argv);
     ~Receiver();
     int waitConnection();
+    bool closeSocket();
     int sendInt(int value);
     int sendMat(Mat img);
     int sendBytes(vector<unsigned char> compressed);

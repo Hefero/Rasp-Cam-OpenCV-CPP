@@ -44,8 +44,24 @@ auto end = std::chrono::high_resolution_clock::now();
         end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duration = end - start;
         if(duration.count() > 3){
-            std::cout << "Lost Connection: " << std::endl;
-            rec = Receiver(argc, argv);
+            std::cout << "Lost Connection!" << std::endl;
+            
+            int tries = 3;
+            auto startRetry = std::chrono::high_resolution_clock::now();            
+            auto endRetry = std::chrono::high_resolution_clock::now();
+            rec.closeSocket();
+            rec.~Receiver();
+            while(tries > 0){                
+                endRetry = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> durationRetry = endRetry - startRetry;
+                if(durationRetry.count() > 10) {
+                    std::cout << "Retrying Connection" << std::endl;
+                    rec = Receiver(argc, argv);
+                    startRetry = std::chrono::high_resolution_clock::now();
+                    tries--;
+                }
+            }
+            
         }
         concatImg = grudaH(gui.a,img);
         imshow("janela",concatImg);

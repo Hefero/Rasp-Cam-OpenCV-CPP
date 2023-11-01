@@ -42,6 +42,9 @@ Receiver::Receiver(int argc, char** argv)
     
 }
 
+bool Receiver::closeSocket(){
+     close(sokt);
+}
 int Receiver::sendInt(int value){
     return send(sokt, &value, sizeof(value), MSG_WAITALL); 
 }
