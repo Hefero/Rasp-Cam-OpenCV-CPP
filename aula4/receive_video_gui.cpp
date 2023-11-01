@@ -47,7 +47,7 @@ auto end = std::chrono::high_resolution_clock::now();
             std::cout << "Lost Connection!" << std::endl;
             
             int tries = 3;
-            auto startRetry = std::chrono::high_resolution_clock::now();            
+            auto startRetry = std::chrono::high_resolution_clock::now();
             auto endRetry = std::chrono::high_resolution_clock::now();
             rec.closeSocket();
             rec.~Receiver();
