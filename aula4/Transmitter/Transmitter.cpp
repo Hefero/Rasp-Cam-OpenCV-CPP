@@ -25,6 +25,8 @@ Transmitter::Transmitter(int argc, char** argv)
     localAddr.sin_addr.s_addr = INADDR_ANY;
     localAddr.sin_port = htons( port );
 
+    int option = 1;    
+    setsockopt(localSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     if( bind(localSocket,(struct sockaddr *)&localAddr , sizeof(localAddr)) < 0) {
          perror("Can't bind() socket");
          //exit(1);
@@ -43,7 +45,8 @@ Transmitter::Transmitter(int argc, char** argv)
     //    exit(1);
     //}
 
-     remoteSocket = accept(localSocket, (struct sockaddr *)&remoteAddr, (socklen_t*)&addrLen);  
+     remoteSocket = accept(localSocket, (struct sockaddr *)&remoteAddr, (socklen_t*)&addrLen);
+     setsockopt(remoteSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
       //std::cout << remoteSocket<< "32"<< std::endl;
     if (remoteSocket < 0) {
         perror("accept failed!");
