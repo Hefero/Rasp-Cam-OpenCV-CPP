@@ -10,10 +10,10 @@
 motorH::motorH()
 
 {
-    if (softPwmCreate(22, 0, 100)) erro("erro");
-    if (softPwmCreate(23, 0, 100)) erro("erro");
-    if (softPwmCreate(24, 0, 100)) erro("erro");
-    if (softPwmCreate(25, 0, 100)) erro("erro");
+   softPwmCreate(22, 0, 100);
+   softPwmCreate(23, 0, 100);
+   softPwmCreate(24, 0, 100);
+   softPwmCreate(25, 0, 100);
 }
 
 void motorH::moveForward()
