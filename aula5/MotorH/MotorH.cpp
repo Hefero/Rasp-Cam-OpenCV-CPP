@@ -84,12 +84,12 @@ void motorH::motorDir(int command, int duty)
         softPwmWrite(23, 0);
         break;
     case 1: // move forward
-        softPwmWrite(22, 0);
-        softPwmWrite(23, duty);
-        break;
-    case -1: // move backwards
         softPwmWrite(22, duty);
         softPwmWrite(23, 0);
+        break;
+    case -1: // move backwards
+        softPwmWrite(22, 0);
+        softPwmWrite(23, duty);
         break;
     case 2: // hard break
         softPwmWrite(22, 100);

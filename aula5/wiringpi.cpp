@@ -7,6 +7,7 @@ int main () {
     motorH motorH;
     while(1){
         motorH.motorDir(1,100);
+        motorH.motorEsq(1,100);
     }
 
 }
