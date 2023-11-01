@@ -4,7 +4,7 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 int main () {
-    MotorH motorH;
+    motorH motorH;
     while(1){
         motorH.moveForward();
     }
