@@ -52,13 +52,10 @@ void motorH::turnLeft(void)
     std::cout << "Virando para esquerda" << std::endl;
     moving = true;
     int i = 0;
-    while(i < LEFT_TURN_DISTANCE)
-    {
         moving = true;
         motorDir(1, velDir);
         motorEsq(-1, velEsq);
         i++;
-    }
 }
 
 void motorH::turnRight(void)
