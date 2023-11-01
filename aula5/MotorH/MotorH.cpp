@@ -2,8 +2,8 @@
 #include <iostream>
 
 
-#define velDir 0.00568f
-#define velEsq 0.0068f
+#define velDir 100
+#define velEsq 100
 
 #define LEFT_TURN_DISTANCE 10000
 #define RIGHT_TURN_DISTANCE 10000
