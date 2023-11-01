@@ -107,7 +107,7 @@ void motorH::motorEsq(int command, int duty)
     }
 }
 
-void motorH::execute(char rxData[8])
+void motorH::execute(string command)
 {
 }
 
