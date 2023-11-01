@@ -49,27 +49,16 @@ void motorH::hardStop(void)
 
 void motorH::turnLeft(void)
 {
-    std::cout << "Virando para esquerda" << std::endl;
     moving = true;
-    int i = 0;
-        moving = true;
-        motorDir(1, velDir);
-        motorEsq(-1, velEsq);
-        i++;
+    motorDir(1, velDir);
+    motorEsq(-1, velEsq);
 }
 
 void motorH::turnRight(void)
 {
-    std::cout << "Virando para direita" << std::endl;
     moving = true;
-    int i = 0;
-    while(i < RIGHT_TURN_DISTANCE)
-    {
-        moving = true;
-        motorDir(-1, velDir);
-        motorEsq(1, velEsq);
-        i++;
-    }
+    motorDir(-1, velDir);
+    motorEsq(1, velEsq);
 }   
 
 void motorH::motorDir(int command, int duty)
