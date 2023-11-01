@@ -2,11 +2,11 @@
 #include <iostream>
 
 
-#define velDir 100
-#define velEsq 100
+#define velDir 30
+#define velEsq 30
 
-#define LEFT_TURN_DISTANCE 100
-#define RIGHT_TURN_DISTANCE 100
+#define LEFT_TURN_DISTANCE 1
+#define RIGHT_TURN_DISTANCE 1
 
 
 motorH::motorH()
