@@ -6,7 +6,7 @@
 int main () {
     motorH motorH;
     while(1){
-        motorH.moveForward();
+        motorH.turnLeft();
     }
 
 }
