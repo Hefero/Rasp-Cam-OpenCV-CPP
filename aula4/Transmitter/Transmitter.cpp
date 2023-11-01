@@ -84,6 +84,8 @@ bool Transmitter::closeSocket(){
     int option = 1;    
     setsockopt(localSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     setsockopt(remoteSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    close(localSocket);
+    close(remoteSocket);
     return true;
     return true;
 }

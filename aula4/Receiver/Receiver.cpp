@@ -46,6 +46,7 @@ bool Receiver::closeSocket(){
      
     int option = 1;    
     setsockopt(sokt, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    close(sokt);
     return true;
 }
 int Receiver::sendInt(int value){
