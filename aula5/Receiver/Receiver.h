@@ -34,7 +34,7 @@ public:
     int sendInt(int value);
     int sendMat(Mat img);
     int sendBytes(vector<unsigned char> compressed);
-    int sendString(string send);
+    int sendString(string value);
     int recvString(string& stor);
     int recvInt(int& value);
     int recvMat(Mat& mat);

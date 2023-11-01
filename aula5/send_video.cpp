@@ -40,7 +40,6 @@ int main(int argc, char** argv)
             int bytesRec;
             rec.recvInt(bytesRec);
             if (bytesRec == vb.size()){
-                start = std::chrono::high_resolution_clock::now();
                 std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
             }
             string command;

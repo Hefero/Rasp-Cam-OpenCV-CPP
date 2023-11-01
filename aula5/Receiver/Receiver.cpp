@@ -59,8 +59,8 @@ int Receiver::sendBytes(vector<unsigned char> compressed){
     sendInt(compressed.size());
     return send(sokt, compressed.data(), compressed.size(), MSG_WAITALL); 
 }
-int Receiver::sendString(string send){
-    return send(sokt, &send, sizeof(send), MSG_WAITALL); 
+int Receiver::sendString(string value){
+    return send(sokt, &value, sizeof(value), MSG_WAITALL); 
 }
 int Receiver::recvString(string& stor){
     return recv(sokt, &stor, sizeof stor, MSG_WAITALL);
