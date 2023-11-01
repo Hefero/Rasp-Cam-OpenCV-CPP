@@ -47,18 +47,6 @@ bool Receiver::closeSocket(){
     int option = 1;    
     setsockopt(sokt, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     close(sokt);
-
-    if ((sokt = socket(PF_INET, SOCK_STREAM, 0)) < 0) {
-        std::cerr << "socket() failed" << std::endl;
-    }
-
-    serverAddr.sin_family = PF_INET;
-    serverAddr.sin_addr.s_addr = inet_addr(serverIP);
-    serverAddr.sin_port = htons(serverPort);
-
-    if (connect(sokt, (sockaddr*)&serverAddr, addrLen) < 0) {
-        std::cerr << "connect() failed!" << std::endl;
-    }
     return true;
 }
 int Receiver::sendInt(int value){

@@ -27,7 +27,7 @@ Transmitter::Transmitter(int argc, char** argv)
 
     if( bind(localSocket,(struct sockaddr *)&localAddr , sizeof(localAddr)) < 0) {
          perror("Can't bind() socket");
-         exit(1);
+         //exit(1);
     }
 
     //Listening
@@ -97,7 +97,7 @@ bool Transmitter::closeSocket(){
 
     if( bind(localSocket,(struct sockaddr *)&localAddr , sizeof(localAddr)) < 0) {
          perror("Can't bind() socket");
-         exit(1);
+         //exit(1);
     }
 
     //Listening
