@@ -7,6 +7,7 @@
 
 Mygui gui;
 
+void sendCommand(Receiver rec, Mygui gui);
 void onMouseGui(int event, int x, int y, int flags, void* userdata)
 { 
     Mouse* mouse=(Mouse*)userdata;
@@ -37,7 +38,7 @@ auto end = std::chrono::high_resolution_clock::now();
  while (key != 'q') {
     try{
         gui.guiLoop();
-        sendCommand;
+        sendCommand(rec, gui);
         if (rec.waitConnection() > 0){
             img = imdecode(rec.buffer,1);
             start = std::chrono::high_resolution_clock::now();
@@ -74,7 +75,7 @@ auto end = std::chrono::high_resolution_clock::now();
  }
 }
 
-void sendCommand(Receiver rec, Mygui gui);
+void sendCommand(Receiver rec, Mygui gui)
 {
     if (gui.mouse.up){
         rec.sendString("stop");
