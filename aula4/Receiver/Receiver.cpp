@@ -43,7 +43,10 @@ Receiver::Receiver(int argc, char** argv)
 }
 
 bool Receiver::closeSocket(){
-     close(sokt);
+     
+    int option = 1;    
+    setsockopt(sokt, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    return true;
 }
 int Receiver::sendInt(int value){
     return send(sokt, &value, sizeof(value), MSG_WAITALL); 

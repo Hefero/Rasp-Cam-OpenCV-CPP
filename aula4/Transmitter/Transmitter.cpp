@@ -79,6 +79,14 @@ int Transmitter::recvMat(Mat& storage){
 int Transmitter::recvBytes(vector<unsigned char>& storage, int size){
     return recv(remoteSocket, storage.data(), size, MSG_WAITALL); 
 }
+
+bool Transmitter::closeSocket(){
+    int option = 1;    
+    setsockopt(localSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    setsockopt(remoteSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    return true;
+    return true;
+}
 // Transmitter constructor
 Transmitter::~Transmitter()
 {

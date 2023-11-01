@@ -34,6 +34,7 @@ public:
     ~Transmitter();
     int sendInt(int value);
     int sendMat(Mat img);
+    bool closeSocket();
     int sendBytes(vector<unsigned char> compressed);
     int recvInt(int& value);
     int recvMat(Mat& mat);

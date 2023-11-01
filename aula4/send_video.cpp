@@ -47,10 +47,24 @@ int main(int argc, char** argv)
             end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> duration = end - start;
             if(duration.count() > 3){
-                std::cout << "Lost Connection: " << bytesRec << std::endl;
-                rec = Transmitter(argc, argv);
+                std::cout << "Lost Connection!" << std::endl;
+                
+                int tries = 3;
+                auto startRetry = std::chrono::high_resolution_clock::now();            
+                auto endRetry = std::chrono::high_resolution_clock::now();
+                rec.closeSocket();
+                rec.~Transmitter();
+                while(tries > 0){                
+                    endRetry = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double> durationRetry = endRetry - startRetry;
+                    if(durationRetry.count() > 10) {
+                        std::cout << "Retrying Connection" << std::endl;
+                        rec = Transmitter(argc, argv);
+                        startRetry = std::chrono::high_resolution_clock::now();
+                        tries--;
+                    }
+                }
             }
-
         }
         catch(cv::Exception ex){
             std::cout << "encoding error " << ex.msg << std::endl;
