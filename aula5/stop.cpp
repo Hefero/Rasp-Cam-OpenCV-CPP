@@ -3,5 +3,5 @@
 #include <softPwm.h>
 int main () {
     motorH motorH;
-        motorH.stop();
+    motorH.stop();
 }

@@ -5,8 +5,8 @@
 #define velDir 100
 #define velEsq 100
 
-#define LEFT_TURN_DISTANCE 10000
-#define RIGHT_TURN_DISTANCE 10000
+#define LEFT_TURN_DISTANCE 100
+#define RIGHT_TURN_DISTANCE 100
 
 
 motorH::motorH()
