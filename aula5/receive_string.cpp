@@ -18,11 +18,16 @@ int main(int argc, char** argv)
            std::cerr << "Usage: cv_video_cli <serverIP> <serverPort> " << std::endl;
     }
     
-    Receiver rec(argc, argv);
-    string recv;
+    Receiver rec(argc, argv);    
+    string receive;
     while(1){
         //rec.sendString("Envio de String");
-        rec.waitConnection();
+        
+        rec.recvString(receive);
+        char a[4096] = "Envio de String";
+        if( strcmp(a,receive.data()) == 0 ){
+            std::cout << receive << std::endl;
+        }
     }
 
     return 0;

@@ -35,10 +35,10 @@ public:
     int sendMat(Mat img);
     int sendBytes(vector<unsigned char> compressed);
     int sendString(string value);
-    int recvString(string& storage, int size);
+    int recvString(string& storage);
     int recvInt(int& value);
     int recvMat(Mat& mat);
-    int recvBytes(vector<unsigned char>& compressed, int size);
+    int recvBytes(vector<unsigned char>& compressed);
 };
 
 #endif

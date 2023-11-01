@@ -3,45 +3,6 @@
 
 int Receiver::waitConnection() 
 {
-    int bytes = 0;
-    int recInt = 0;
-    int bytesSize = 0;
-    int stringSize = 0;
-    if (bytes = recvInt(recInt) > 0) {
-        //std::cout << "received int = " << recInt << std::endl;
-        switch(recInt) 
-        {
-        case 594631: // bytes
-            if (int recBytes = recvInt(bytesSize) > 0) {
-                //buffer.resize(bytesSize);
-                int result = recvBytes(buffer, bytesSize);
-                if (result == bytesSize) {                
-                    std::cout << "received number of bytes: " << result << std::endl;
-                    //sendInt(bytesSize); //send confirmation of received
-                    return result;       
-                } else {
-                    return -1;
-                }
-            }
-            break;
-         case 866685: // string
-            if (int recString = recvInt(stringSize) > 0) {
-                string command;                
-                int result = recvString(command, stringSize);
-                if (result == stringSize) {                
-                    std::cout << "received command: " << command << std::endl;
-                    //sendInt(stringSize); //send confirmation of received
-                    return result;       
-                } else {
-                    return -1;
-                }
-            }
-            break;
-        default:
-            break;
-        }
-    }
-    return recInt;
 }
 
 Receiver::Receiver(int argc, char** argv)
@@ -91,22 +52,49 @@ int Receiver::sendString(string dataToSend){
     return send(sokt,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
                                                             
 }
-int Receiver::recvString(string& storage, int size){
-    const unsigned int MAX_BUF_LENGTH = 4096;
-    std::vector<char> buffer(MAX_BUF_LENGTH);
-    string receivedString;
-    int bytesReceived = 0;
-    do {
-        bytesReceived = recv(sokt, &buffer[0], buffer.size(), 0);
-        // append string from buffer.
-        if ( bytesReceived == -1 ) { 
-            // error 
-        } else {
-            receivedString.append( buffer.cbegin(), buffer.cend() );
+
+int Receiver::recvString(string& storage){
+    int bytes = 0;
+    int recInt = 0;
+    int bytesSize = 0;
+    int stringSize = 0;
+    if (bytes = recvInt(recInt) > 0) {
+        //std::cout << "received int = " << recInt << std::endl;
+        switch(recInt) 
+        {
+         case 866685: // string
+            if (int recString = recvInt(stringSize) > 0) {
+                string command;                
+                int result = 0;
+                const unsigned int MAX_BUF_LENGTH = 4096;
+                std::vector<char> buffer(MAX_BUF_LENGTH);
+                string receivedString;
+                int bytesReceived = 0;
+                do {
+                    bytesReceived = recv(sokt, &buffer[0], buffer.size(), 0);
+                    // append string from buffer.
+                    if ( bytesReceived == -1 ) { 
+                        // error 
+                    } else {
+                        receivedString.append( buffer.cbegin(), buffer.cend() );
+                    }
+                } while ( bytesReceived == MAX_BUF_LENGTH );
+                storage = receivedString;
+                result = bytesReceived;
+                if (result == stringSize) {                
+                    //std::cout << "received command: " << storage << std::endl;
+                    //sendInt(stringSize); //send confirmation of received                    
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+        default:
+            break;
         }
-    } while ( bytesReceived == MAX_BUF_LENGTH );
-    storage = receivedString;
-    return bytesReceived; 
+    }
+    return recInt;
 }
 int Receiver::recvInt(int& storage){
     return recv(sokt, &storage, sizeof storage, MSG_WAITALL);
@@ -116,8 +104,34 @@ int Receiver::recvMat(Mat& storage){
     return recv(sokt, storage.data, storage.total() * storage.elemSize(), MSG_WAITALL); 
 }
 
-int Receiver::recvBytes(vector<unsigned char>& storage, int size){
-    return recv(sokt, storage.data(), size, MSG_WAITALL); 
+
+int Receiver::recvBytes(vector<unsigned char>& storage){
+    int bytes = 0;
+    int recInt = 0;
+    int bytesSize = 0;
+    int stringSize = 0;
+    if (bytes = recvInt(recInt) > 0) {
+        //std::cout << "received int = " << recInt << std::endl;
+        switch(recInt) 
+        {
+        case 594631: // bytes
+            if (int recBytes = recvInt(bytesSize) > 0) {
+                //buffer.resize(bytesSize);
+                int result = recv(sokt, storage.data(), bytesSize, MSG_WAITALL);
+                if (result == bytesSize) {                
+                    std::cout << "received number of bytes: " << result << std::endl;
+                    //sendInt(bytesSize); //send confirmation of received
+                    return result;       
+                } else {
+                    return -1;
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    return recInt;
 }
 // Transmitter constructor
 Receiver::~Receiver()
