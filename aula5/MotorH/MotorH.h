@@ -17,7 +17,7 @@ class motorH
         void turnRight();
         void stop();
         void hardStop();
-        void execute(string command);
+        void execute(string& command);
         void debug();
         bool moving = false;
 };
