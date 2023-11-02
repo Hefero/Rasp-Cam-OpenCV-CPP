@@ -129,12 +129,13 @@ void motorH::execute(string& command, motorH& motor)
             char b1[4096] = "b1";    
             if( strcmp(command.data(),b1) == 0 ){
                 std::cout << command << std::endl;
-                motorDir(1, velDir);
-                motorEsq(0, 0);
             }
             char b2[4096] = "b2";
             if( strcmp(command.data(),b2) == 0 ){
-                this->moveForward();
+                softPwmWrite(22, velDir);
+                softPwmWrite(23, velDir);
+                softPwmWrite(24, velEsq);
+                softPwmWrite(25, velEsq);
                 std::cout << command << std::endl;
             }
             char b3[4096] = "b3";    
