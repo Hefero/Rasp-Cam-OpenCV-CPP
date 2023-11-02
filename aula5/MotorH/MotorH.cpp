@@ -109,12 +109,10 @@ void motorH::motorEsq(int command, int duty)
 
 void motorH::execute(string command)
 {
-    switch(command) 
-    {
-    char b2[4096] = "b2";
-    case b2:  // ponto morto
-        std::cout << "b2" << command << std::endl;
-        break;        
+    
+    char b2[4096] = "b2";    
+    if( strcmp(b2,command.data()) == 0 ){
+        std::cout << command << std::endl;
     }
 }
 
