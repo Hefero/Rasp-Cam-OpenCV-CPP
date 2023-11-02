@@ -115,7 +115,7 @@ void motorH::execute(string& command)
         if( strcmp(command.data(),stop) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b1";    
+        char b1[4096] = "b1";    
         if( strcmp(command.data(),b1) == 0 ){
             std::cout << command << std::endl;
         }
@@ -123,32 +123,32 @@ void motorH::execute(string& command)
         if( strcmp(command.data(),b2) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b3";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b3[4096] = "b3";    
+        if( strcmp(command.data(),b3) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b4";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b4[4096] = "b4";    
+        if( strcmp(command.data(),b4) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b5";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b5[4096] = "b5";    
+        if( strcmp(command.data(),b5) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b6";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b6[4096] = "b6";    
+        if( strcmp(command.data(),b6) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b7";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b7[4096] = "b7";    
+        if( strcmp(command.data(),b7) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b8";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b8[4096] = "b8";    
+        if( strcmp(command.data(),b8) == 0 ){
             std::cout << command << std::endl;
         }
-        char b2[4096] = "b9";    
-        if( strcmp(command.data(),b2) == 0 ){
+        char b9[4096] = "b9";    
+        if( strcmp(command.data(),b9) == 0 ){
             std::cout << command << std::endl;
         }
 
