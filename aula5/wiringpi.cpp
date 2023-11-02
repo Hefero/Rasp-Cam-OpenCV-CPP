@@ -4,5 +4,5 @@
 
 int main () {
     motorH motor;
-    //motor.moveForward();
+    motor.moveForward();
 }
