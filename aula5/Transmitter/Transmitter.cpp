@@ -100,7 +100,7 @@ int Transmitter::recvString(string& storage){
                 string receivedString;
                 int bytesReceived = 0;
                 do {
-                    bytesReceived = recv(sokt, &buffer[0], buffer.size(), 0);
+                    bytesReceived = recv(remoteSocket, &buffer[0], buffer.size(), 0);
                     // append string from buffer.
                     if ( bytesReceived == -1 ) { 
                         // error 
