@@ -7,7 +7,7 @@
 
 Mygui gui;
 
-void sendCommand(Receiver rec, Mygui gui);
+void sendCommand(Receiver& rec, Mygui& gui);
 void onMouseGui(int event, int x, int y, int flags, void* userdata)
 { 
     Mouse* mouse=(Mouse*)userdata;
@@ -38,8 +38,7 @@ auto end = std::chrono::high_resolution_clock::now();
     
  while (key != 'q') {
     try{
-        gui.guiLoop();
-        //sendCommand(rec, gui);
+        gui.guiLoop();        
         if (rec.recvBytes(compressed) > 0){
             img = imdecode(compressed,1);
             start = std::chrono::high_resolution_clock::now();
@@ -66,8 +65,9 @@ auto end = std::chrono::high_resolution_clock::now();
             }
             
         }
-        concatImg = grudaH(gui.a,img);
+        concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
+        sendCommand(rec, gui);
     }
     catch(cv::Exception ex){
             continue;
@@ -76,36 +76,36 @@ auto end = std::chrono::high_resolution_clock::now();
  }
 }
 
-void sendCommand(Receiver rec, Mygui gui)
+void sendCommand(Receiver& rec, Mygui& gui)
 {
     if (gui.mouse.up){
         rec.sendString("stop");
     }
-    if(gui.b1.ligado){
-        rec.sendString("b1");        
+    if(!gui.b1.getState()){
+        rec.sendString("b1");
     }
-    if(gui.b2.ligado){
-        rec.sendString("b2");        
+    if(!gui.b2.getState()){
+        rec.sendString("b2");
     }
-    if(gui.b3.ligado){
+    if(!gui.b3.getState()){
         rec.sendString("b3");        
     }
-    if(gui.b4.ligado){
+    if(!gui.b4.getState()){
         rec.sendString("b4");        
     }
-    if(gui.b5.ligado){
+    if(!gui.b5.getState()){
         rec.sendString("b5");        
     }
-    if(gui.b6.ligado){
+    if(!gui.b6.getState()){
         rec.sendString("b6");        
     }
-    if(gui.b7.ligado){
+    if(!gui.b7.getState()){
         rec.sendString("b7");        
     }
-    if(gui.b8.ligado){
+    if(!gui.b8.getState()){
         rec.sendString("b8");        
     }
-    if(gui.b9.ligado){
+    if(!gui.b9.getState()){
         rec.sendString("b9");        
     }
 }

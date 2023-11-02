@@ -38,18 +38,13 @@ int main(int argc, char** argv)
             imencode(".jpg",img,vb,param);
             rec.sendBytes(vb);
             int bytesRec;
-            /*
-            rec.recvInt(bytesRec);
-            if (bytesRec == vb.size()){
-                std::cout << "Received confirmation of bytes: " << bytesRec << std::endl;
-            }
+            
             string command;
             int bytesCommand = rec.recvString(command);
             if(bytesCommand > 0){
                 std::cout << "receive command" << command << std::endl;
                 //motorH.execute(command);
-            }
-            */
+            }            
         }
         catch(cv::Exception ex){
             std::cout << "encoding error " << ex.msg << std::endl;
