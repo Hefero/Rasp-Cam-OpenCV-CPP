@@ -6,6 +6,9 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 
+using std::string;
+
+
 
 class motorH
 {
