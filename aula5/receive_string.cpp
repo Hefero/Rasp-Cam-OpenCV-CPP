@@ -24,9 +24,9 @@ int main(int argc, char** argv)
         //rec.sendString("Envio de String");
         
         rec.recvString(receive);
-        char a[4096] = "Envio de String";
-        if( strcmp(a,receive.data()) == 0 ){
-            std::cout << receive << std::endl;
+        char a[4096] = "b1";
+        if( strcmp(receive.data(),a) == 125 ){
+            std::cout << strcmp(receive.data(),a) << std::endl;
         }
     }
 

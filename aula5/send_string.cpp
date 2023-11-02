@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     vector<unsigned char> vb;
     vb.assign(1000,345);
     while(1){
-        rec.sendString("Envio de String");
+        rec.sendString("b1asd");
         //rec.sendInt(594631);
         //rec.sendBytes(vb);
     }
