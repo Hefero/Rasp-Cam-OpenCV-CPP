@@ -77,7 +77,7 @@ int Transmitter::sendBytes(vector<unsigned char> compressed){
     return send(remoteSocket, compressed.data(), compressed.size(), MSG_WAITALL); 
 }
 int Transmitter::sendString(string dataToSend){
-    sendInt(866685);    
+    sendInt(866685);
     sendInt(dataToSend.size());
     return send(remoteSocket,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
                                                             
