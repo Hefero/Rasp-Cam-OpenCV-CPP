@@ -67,7 +67,10 @@ auto end = std::chrono::high_resolution_clock::now();
         }
         concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
-        sendCommand(rec, gui);
+        //sendCommand(rec, gui);
+        if(gui.b1.getState()){
+            rec.sendString("b1");
+        }
     }
     catch(cv::Exception ex){
             continue;
@@ -79,12 +82,13 @@ auto end = std::chrono::high_resolution_clock::now();
 void sendCommand(Receiver& rec, Mygui& gui)
 {
     //if (gui.mouse.up){
-        rec.sendString("stop");
+        //rec.sendString("stop");
     //}
-    /*
+    
     if(gui.b1.getState()){
         rec.sendString("b1");
     }
+    /*
     if(gui.b2.getState()){
         rec.sendString("b2");
     }

@@ -20,7 +20,7 @@ class Botao
     bool ligado,primeiraVez = true;
     Botao(Point _p, Point _q, string _st0, string _st1="", bool _ligado = true);
     void testaDesenha(Mat_<Vec3b>& a, Mouse mouse);
-    int getState() const { return ligado; }
+    bool getState() const { return ligado; }
 };
 
 
