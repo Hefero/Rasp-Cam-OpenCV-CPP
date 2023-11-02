@@ -111,7 +111,7 @@ int Transmitter::recvString(string& storage){
                 storage = receivedString;
                 result = bytesReceived;
                 if (result == stringSize) {                
-                    std::cout << "received command: " << storage << std::endl;
+                    //std::cout << "received command: " << storage << std::endl;
                     //sendInt(stringSize); //send confirmation of received                    
                     return result;       
                 } else {
