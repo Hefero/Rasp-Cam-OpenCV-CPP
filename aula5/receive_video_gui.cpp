@@ -69,6 +69,7 @@ auto end = std::chrono::high_resolution_clock::now();
         //if(state){
         rec.sendString("Keep Alive");
         //}
+        wait(1);
         concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
         sendCommand(rec, gui);
