@@ -44,7 +44,7 @@ int main(int argc, char** argv)
             int bytesCommand = rec.recvString(command);
             if(command.size() > 1){                
                 std::cout << command << std::endl;
-                motor.execute(command);
+                //motor.execute(command);
             }            
         }
         catch(cv::Exception ex){
