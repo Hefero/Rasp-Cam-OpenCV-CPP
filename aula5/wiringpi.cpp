@@ -4,6 +4,6 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 int main () {
-    motorH motorH;
-    motorH.moveForward();
+    motorH motor;
+    motor.moveForward();
 }
