@@ -5,7 +5,6 @@
 #include <chrono>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "Transmitter/Transmitter.cpp"
 #include "MotorH/MotorH.cpp"
 #include <wiringPi.h>
 #include <softPwm.h>
