@@ -41,7 +41,7 @@ int main(int argc, char** argv)
             
             string command;
             int bytesCommand = rec.recvString(command);
-            if(bytesCommand > 0){
+            if(command.size() > 1){
                 std::cout << "receive command" << command << std::endl;
                 //motorH.execute(command);
             }            
