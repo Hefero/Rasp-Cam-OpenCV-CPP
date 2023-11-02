@@ -10,7 +10,6 @@
 #include <chrono>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "MotorH/MotorH.cpp"
 #include <wiringPi.h>
 #include <softPwm.h>
 
