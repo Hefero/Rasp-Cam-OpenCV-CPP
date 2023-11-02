@@ -5,5 +5,5 @@
 #include <softPwm.h>
 int main () {
     motorH motorH;
-    motorH.turnLeft();
+    motorH.moveForward();
 }
