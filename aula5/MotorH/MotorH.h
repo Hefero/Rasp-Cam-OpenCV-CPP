@@ -20,6 +20,7 @@ using std::string;
 class motorH
 {
     public:
+        string lastCommand;
         motorH();
         void motorDir(int command, int duty);
         void motorEsq(int command, int duty);
