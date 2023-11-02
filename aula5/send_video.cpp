@@ -18,6 +18,7 @@ using namespace cv;
 
 int capDev = 0;
 VideoCapture cap(capDev); // open the default camera
+motorH motor;
 
 int main(int argc, char** argv)
 {
@@ -43,7 +44,7 @@ int main(int argc, char** argv)
             int bytesCommand = rec.recvString(command);
             if(command.size() > 1){
                 //std::cout << "receive command" << command << std::endl;
-                motorH.execute(command);
+                motor.execute(command);
             }            
         }
         catch(cv::Exception ex){
