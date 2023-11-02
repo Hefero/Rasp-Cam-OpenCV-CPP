@@ -1,5 +1,6 @@
-#include "MotorH.h"
+#include <string>
 #include <iostream>
+#include "MotorH.h"
 
 
 #define velDir 30
