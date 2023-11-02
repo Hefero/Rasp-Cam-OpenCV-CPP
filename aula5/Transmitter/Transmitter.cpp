@@ -146,7 +146,7 @@ int Transmitter::recvBytes(vector<unsigned char>& storage){
         case 594631: // bytes
             if (int recBytes = recvInt(bytesSize) > 0) {
                 storage.resize(bytesSize);
-                int result = recv(sokt, storage.data(), bytesSize, MSG_WAITALL);
+                int result = recv(remoteSocket, storage.data(), bytesSize, MSG_WAITALL);
                 if (result == bytesSize) {                
                     std::cout << "received number of bytes: " << result << std::endl;
                     //sendInt(bytesSize); //send confirmation of received
