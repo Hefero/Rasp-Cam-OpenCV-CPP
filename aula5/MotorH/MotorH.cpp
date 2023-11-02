@@ -1,5 +1,14 @@
 #include <string>
 #include <iostream>
+#include "opencv2/opencv.hpp"
+#include <sys/socket.h> 
+#include <chrono>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include "Transmitter/Transmitter.cpp"
+#include "MotorH/MotorH.cpp"
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "MotorH.h"
 
 
