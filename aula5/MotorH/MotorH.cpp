@@ -24,8 +24,7 @@ motorH::motorH()
    softPwmCreate(22, 0, 100);
    softPwmCreate(23, 0, 100);
    softPwmCreate(24, 0, 100);
-   softPwmCreate(25, 0, 100);
-   moveForward();
+   softPwmCreate(25, 0, 100);   
 }
 
 void motorH::moveForward()
