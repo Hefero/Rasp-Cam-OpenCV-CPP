@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     if (argc < 3) {
            std::cerr << "Usage: cv_video_cli <serverIP> <serverPort> " << std::endl;
     }
-    motor.stop();
+    //motor.stop();
 
     Transmitter rec(argc, argv);
 
