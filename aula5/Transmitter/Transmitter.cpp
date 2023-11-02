@@ -100,7 +100,7 @@ int Transmitter::recvString(string& storage){
                 string receivedString;
                 int bytesReceived = 0;
                 do {
-                    bytesReceived = recv(remoteSocket, &buffer[0], buffer.size(), 0);
+                    bytesReceived = recv(sokt, &buffer[0], buffer.size(), 0);
                     // append string from buffer.
                     if ( bytesReceived == -1 ) { 
                         // error 
@@ -111,8 +111,8 @@ int Transmitter::recvString(string& storage){
                 storage = receivedString;
                 result = bytesReceived;
                 if (result == stringSize) {                
-                    std::cout << "received command: " << command << std::endl;
-                    //sendInt(stringSize); //send confirmation of received
+                    //std::cout << "received command: " << storage << std::endl;
+                    //sendInt(stringSize); //send confirmation of received                    
                     return result;       
                 } else {
                     return -1;
@@ -145,8 +145,8 @@ int Transmitter::recvBytes(vector<unsigned char>& storage){
         {
         case 594631: // bytes
             if (int recBytes = recvInt(bytesSize) > 0) {
-                //buffer.resize(bytesSize);
-                int result = recv(remoteSocket, storage.data(), bytesSize, MSG_WAITALL);
+                storage.resize(bytesSize);
+                int result = recv(sokt, storage.data(), bytesSize, MSG_WAITALL);
                 if (result == bytesSize) {                
                     std::cout << "received number of bytes: " << result << std::endl;
                     //sendInt(bytesSize); //send confirmation of received

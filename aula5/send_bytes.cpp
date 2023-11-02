@@ -25,8 +25,8 @@ int main(int argc, char** argv)
     while(1){
         rec.sendBytes(vc);
         int bytesRec;
-        rec.recvInt(bytesRec);
-        std::cout << "Receveid confirmation of bytes: " << bytesRec << std::endl;
+        //rec.recvInt(bytesRec);
+        //std::cout << "Receveid confirmation of bytes: " << bytesRec << std::endl;
     }
 
     return 0;

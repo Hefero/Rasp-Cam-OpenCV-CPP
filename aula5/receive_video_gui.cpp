@@ -39,7 +39,7 @@ auto end = std::chrono::high_resolution_clock::now();
  while (key != 'q') {
     try{
         gui.guiLoop();
-        sendCommand(rec, gui);
+        //sendCommand(rec, gui);
         if (rec.recvBytes(compressed) > 0){
             img = imdecode(compressed,1);
             start = std::chrono::high_resolution_clock::now();

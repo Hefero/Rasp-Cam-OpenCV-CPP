@@ -19,7 +19,10 @@ int main(int argc, char** argv)
     }
     
     Receiver rec(argc, argv);
-    rec.waitConnection();
+    while(1){
+        vector<unsigned char> vvb;
+        rec.recvBytes(vvb);
+    }
 
     return 0;
 }
