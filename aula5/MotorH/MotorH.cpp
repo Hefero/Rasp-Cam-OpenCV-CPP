@@ -132,10 +132,10 @@ void motorH::execute(string& command, motorH& motor)
             }
             char b2[4096] = "b2";
             if( strcmp(command.data(),b2) == 0 ){
-                softPwmWrite(22, 30);
-                softPwmWrite(23, 30);
-                softPwmWrite(24, 30);
-                softPwmWrite(25, 30);
+                //softPwmWrite(22, 30);
+                //softPwmWrite(23, 30);
+                //softPwmWrite(24, 30);
+                //softPwmWrite(25, 30);
                 std::cout << command << std::endl;
             }
             char b3[4096] = "b3";    
