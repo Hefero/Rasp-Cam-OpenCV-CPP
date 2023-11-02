@@ -33,7 +33,6 @@ public:
     std::vector<unsigned char> buffer;
     Transmitter(int argc, char** argv);
     ~Transmitter();
-    int waitConnection();
     int sendInt(int value);
     int sendMat(Mat img);
     bool closeSocket();

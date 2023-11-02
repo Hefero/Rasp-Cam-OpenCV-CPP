@@ -1,9 +1,5 @@
 #include "Transmitter.h"
 
-int Transmitter::waitConnection() 
-{
-}
-
 Transmitter::Transmitter(int argc, char** argv)
 {
     

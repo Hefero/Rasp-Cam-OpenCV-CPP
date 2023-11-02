@@ -29,7 +29,6 @@ public:
     std::vector<unsigned char> buffer;
     Receiver(int argc, char** argv);
     ~Receiver();
-    int waitConnection();
     bool closeSocket();
     int sendInt(int value);
     int sendMat(Mat img);
