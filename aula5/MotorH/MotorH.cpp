@@ -115,7 +115,7 @@ void motorH::motorEsq(int command, int duty)
     }
 }
 
-void motorH::execute(string& command)
+void motorH::execute(string& command, motorH& motor)
 {
     if (strcmp(command.data(),lastCommand.data()) != 0){        
     
@@ -134,7 +134,7 @@ void motorH::execute(string& command)
             }
             char b2[4096] = "b2";    
             if( strcmp(command.data(),b2) == 0 ){
-                moveForward();
+                motor.moveForward();
                 std::cout << command << std::endl;
             }
             char b3[4096] = "b3";    

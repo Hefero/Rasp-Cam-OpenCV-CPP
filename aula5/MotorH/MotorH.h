@@ -30,7 +30,7 @@ class motorH
         void turnRight();
         void stop();
         void hardStop();
-        void execute(string& command);
+        void execute(string& command, motorH& motor);
         void debug();
         bool moving = false;
 };
