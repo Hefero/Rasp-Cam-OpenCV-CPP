@@ -88,7 +88,7 @@ void motorH::motorEsq(int command, int duty)
 {
     switch(command) 
     {
-    char b2[4096] = "b2":
+    char b2[4096] = "b2";
     case b2:  // ponto morto
         std::cout << "b2" << command << std::endl;
         break;        
