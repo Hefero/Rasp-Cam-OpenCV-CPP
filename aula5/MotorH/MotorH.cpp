@@ -124,7 +124,7 @@ void motorH::execute(string& command)
             char stop[4096] = "stop";    
             if( strcmp(command.data(),stop) == 0){            
                 std::cout << command << std::endl;
-                motorH::stop();
+                //motorH::stop();
             }
             char b1[4096] = "b1";    
             if( strcmp(command.data(),b1) == 0 ){
