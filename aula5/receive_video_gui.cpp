@@ -38,7 +38,8 @@ auto end = std::chrono::high_resolution_clock::now();
     
  while (key != 'q') {
     try{
-        gui.guiLoop();        
+        gui.guiLoop();
+        rec.sendString("Keep Alive");  
         if (rec.recvBytes(compressed) > 0){
             img = imdecode(compressed,1);
             start = std::chrono::high_resolution_clock::now();
@@ -64,12 +65,7 @@ auto end = std::chrono::high_resolution_clock::now();
                 }
             }
             
-        }
-        //bool state = gui.b1.getState();
-        //if(state){
-        rec.sendString("Keep Alive");
-        //}
-        wait(1);
+        }        
         concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
         sendCommand(rec, gui);
