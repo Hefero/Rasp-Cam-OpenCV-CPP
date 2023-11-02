@@ -25,9 +25,9 @@ int main(int argc, char** argv)
         
         rec.recvString(receive);
         char a[4096] = "b1";
-        if( strcmp(receive.data(),a) == 125 ){
-            std::cout << strcmp(receive.data(),a) << std::endl;
-        }
+        //if( strcmp(receive.data(),a) == 125 ){
+            std::cout << receive << std::endl;
+        //}
     }
 
     return 0;

@@ -65,12 +65,13 @@ auto end = std::chrono::high_resolution_clock::now();
             }
             
         }
+        //if(gui.b1.getState()){
+            rec.sendString("b1");
+        //}
         concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
         //sendCommand(rec, gui);
-        if(gui.b1.getState()){
-            rec.sendString("b1");
-        }
+        
     }
     catch(cv::Exception ex){
             continue;
