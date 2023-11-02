@@ -110,13 +110,13 @@ void motorH::motorEsq(int command, int duty)
 void motorH::execute(string& command)
 {
     if(command.size() > 1){
-        //std::cout << "receive command " << command << std::endl;
+        std::cout << "receive command " << command << std::endl;
         char b2[4096] = "b2";    
-        if( strcmp(command.data(),b2) == 125 ){
+        if( strcmp(command.data(),b2) == 0 ){
             std::cout << command << std::endl;
         }
         char stop[4096] = "stop";    
-        if( strcmp(command.data(),stop) == 125 ){
+        if( strcmp(command.data(),stop) == 0 ){
             std::cout << command << std::endl;
         }
     }

@@ -65,12 +65,13 @@ auto end = std::chrono::high_resolution_clock::now();
             }
             
         }
-        //if(gui.b1.getState()){
-            rec.sendString("b1");
+        //bool state = gui.b1.getState();
+        //if(state){
+        rec.sendString("Keep Alive");
         //}
         concatImg = grudaH(gui.a,img);        
         imshow("janela",concatImg);
-        //sendCommand(rec, gui);
+        sendCommand(rec, gui);
         
     }
     catch(cv::Exception ex){
@@ -82,17 +83,18 @@ auto end = std::chrono::high_resolution_clock::now();
 
 void sendCommand(Receiver& rec, Mygui& gui)
 {
-    //if (gui.mouse.up){
-        //rec.sendString("stop");
-    //}
+    if (gui.mouse.up){
+        rec.sendString("stop");
+    }
     
     if(gui.b1.getState()){
         rec.sendString("b1");
     }
-    /*
+    
     if(gui.b2.getState()){
         rec.sendString("b2");
     }
+    
     if(gui.b3.getState()){
         rec.sendString("b3");        
     }
@@ -114,5 +116,5 @@ void sendCommand(Receiver& rec, Mygui& gui)
     if(gui.b9.getState()){
         rec.sendString("b9");        
     }
-    */
+    
 }
