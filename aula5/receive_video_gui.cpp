@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 Receiver rec(argc, argv);
 
 Mat img = Mat::zeros(480 , 640, CV_8UC3);
+vector<unsigned char> compressed;
 Mat concatImg = Mat::zeros(480+480 , 640, CV_8UC3);
 
 namedWindow("janela");
@@ -39,8 +40,8 @@ auto end = std::chrono::high_resolution_clock::now();
     try{
         gui.guiLoop();
         sendCommand(rec, gui);
-        if (rec.waitConnection() > 0){
-            img = imdecode(rec.buffer,1);
+        if (rec.recvBytes(compressed) > 0){
+            img = imdecode(compressed,1);
             start = std::chrono::high_resolution_clock::now();
         }
         end = std::chrono::high_resolution_clock::now();
