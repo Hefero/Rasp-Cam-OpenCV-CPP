@@ -1,6 +1,8 @@
 #ifndef MOTORH_H
 #define MOTORH_H
 
+#include <string>
+#include <iostream>
 #include <wiringPi.h>
 #include <softPwm.h>
 
