@@ -36,8 +36,8 @@ void motorH::moveForward()
 void motorH::moveBackwards()
 {
     moving = true;
-    motorDir(1, velDir); 
-    motorEsq(1, velEsq);
+    motorDir(-1, velDir); 
+    motorEsq(-1, velEsq);
 }
 
 void motorH::stop(void)
