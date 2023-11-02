@@ -88,6 +88,16 @@ void motorH::motorEsq(int command, int duty)
 {
     switch(command) 
     {
+    case char[4096] = "b2": // ponto morto
+        std::cout << "b2" << command << std::endl;
+        break;        
+    }
+}
+
+void motorH::execute(string command)
+{
+    switch(command) 
+    {
     case 0: // ponto morto
         softPwmWrite(24, 0);
         softPwmWrite(25, 0);
@@ -105,10 +115,6 @@ void motorH::motorEsq(int command, int duty)
         softPwmWrite(25, 100);
         break;
     }
-}
-
-void motorH::execute(string command)
-{
 }
 
 void motorH::debug(void)  // debug function
