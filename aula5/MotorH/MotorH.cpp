@@ -134,7 +134,7 @@ void motorH::execute(string& command, motorH& motor)
             }
             char b2[4096] = "b2";
             if( strcmp(command.data(),b2) == 0 ){
-                moveForward();
+                this->moveForward();
                 std::cout << command << std::endl;
             }
             char b3[4096] = "b3";    
