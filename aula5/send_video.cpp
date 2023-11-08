@@ -37,16 +37,16 @@ int main(int argc, char** argv)
     while(1){        
         try{
             cap >> img;
-            imencode(".jpg",img,vb,param);
+            //imencode(".jpg",img,vb,param);
             rec.sendMat(img);
-            int bytesRec;
+            //int bytesRec;
             
-            string command;
-            int bytesCommand = rec.recvString(command);
-            if(command.size() > 1){                
-                //std::cout << command << std::endl;
-                motor.execute(command, motor);
-            }            
+            //string command;
+            //int bytesCommand = rec.recvString(command);
+            //if(command.size() > 1){                
+            //    //std::cout << command << std::endl;
+            //    motor.execute(command, motor);
+            //}            
         }
         catch(cv::Exception ex){
             std::cout << "encoding error " << ex.msg << std::endl;

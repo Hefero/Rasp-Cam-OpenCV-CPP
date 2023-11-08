@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     while(key != 'q'){
         
         rec.recvMat(img);        
-        img = imdecode(vb,1);
+        //img = imdecode(vb,1);
 
         cv::imshow("CV Video Client", img);
         if (key = cv::waitKey(10) >= 0) break;
