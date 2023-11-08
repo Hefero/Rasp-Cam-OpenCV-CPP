@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     
     while(key != 'q'){
         
-        rec.recvBytes(vb);        
+        rec.recvMat(img);        
         img = imdecode(vb,1);
 
         cv::imshow("CV Video Client", img);

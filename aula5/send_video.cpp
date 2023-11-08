@@ -38,7 +38,7 @@ int main(int argc, char** argv)
         try{
             cap >> img;
             imencode(".jpg",img,vb,param);
-            rec.sendBytes(vb);
+            rec.sendMat(img);
             int bytesRec;
             
             string command;
