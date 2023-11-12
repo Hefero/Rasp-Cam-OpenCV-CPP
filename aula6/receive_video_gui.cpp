@@ -94,20 +94,21 @@ void sendFollow(Receiver& rec, Mat& frame, std::vector<Rect>& faces)
 {
     if(faces.size() > 0){
         if (30 < faces[0].width < 100){
-            int Xrect = faces[0].x - faces[0].width/2;
-            int Xcenter = 240;
-            int epsilon = 50;
-            if (abs(Xrect - Xcenter) < epsilon){ // está ao centro
-                std::cout << "Centro" << std::endl;
+            int Xrect = faces[0].x+faces[0].width/2;
+            int Xcenter = 320;
+            int epsilon = 70;
+            if (abs(Xcenter - Xrect) < epsilon){ // está ao centro
+                std::cout << "Centro "<< Xrect << std::endl;
                 rec.sendString("b2");
             }
             else{
-                if (Xrect > (Xcenter - epsilon)){ // está a direita
-                std::cout << "Direita" << std::endl;
+                if (Xrect > (Xcenter + epsilon)){ // está a direita
+                std::cout << "Direita " << Xrect << std::endl;
+                
                 rec.sendString("b7");
                 }
-                if (Xrect < (Xcenter + epsilon)){ // está a esquerda
-                std::cout << "Esquerda" << std::endl;
+                if (Xrect < (Xcenter - epsilon)){ // está a esquerda
+                std::cout << "Esquerda " << Xrect << std::endl;
                 rec.sendString("b1");
                 }
             }
