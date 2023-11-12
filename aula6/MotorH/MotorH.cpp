@@ -10,8 +10,8 @@
 #include "MotorH.h"
 
 
-#define velDir 40
-#define velEsq 40
+#define velDir 30
+#define velEsq 30
 
 #define LEFT_TURN_DISTANCE 1
 #define RIGHT_TURN_DISTANCE 1
