@@ -50,9 +50,9 @@ auto end = std::chrono::high_resolution_clock::now();
             img = imdecode(compressed,1);
         }
 
-        //detectAndDisplay(img, faces);
-        sendFollow(rec, img, faces);
-        //concatImg = grudaH(gui.a,img);        
+        detectAndDisplay(img, faces);
+        //sendFollow(rec, img, faces);
+        concatImg = grudaH(gui.a,img);        
         imshow("janela",img);
     }
     catch(cv::Exception ex){

@@ -31,20 +31,20 @@ bool Receiver::closeSocket(){
     return true;
 }
 int Receiver::sendInt(int value){
-    return send(sokt, &value, sizeof(value), MSG_WAITALL); 
+    return send(sokt, &value, sizeof(value), MSG_DONTWAIT); 
 }
 int Receiver::sendMat(Mat img){
-    return send(sokt, img.data, img.total() * img.elemSize(), MSG_WAITALL); 
+    return send(sokt, img.data, img.total() * img.elemSize(), MSG_DONTWAIT); 
 }
 int Receiver::sendBytes(vector<unsigned char> compressed){
     sendInt(594631);
     sendInt(compressed.size());
-    return send(sokt, compressed.data(), compressed.size(), MSG_WAITALL); 
+    return send(sokt, compressed.data(), compressed.size(), MSG_DONTWAIT); 
 }
 int Receiver::sendString(string dataToSend){
     sendInt(866685);    
     sendInt(dataToSend.size());
-    return send(sokt,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
+    return send(sokt,dataToSend.c_str(),dataToSend.size(),MSG_DONTWAIT); // Send the string 
                                                             
 }
 
@@ -92,11 +92,11 @@ int Receiver::recvString(string& storage){
     return recInt;
 }
 int Receiver::recvInt(int& storage){
-    return recv(sokt, &storage, sizeof storage, MSG_WAITALL);
+    return recv(sokt, &storage, sizeof storage, MSG_DONTWAIT);
 }
 
 int Receiver::recvMat(Mat& storage){
-    return recv(sokt, storage.data, storage.total() * storage.elemSize(), MSG_WAITALL); 
+    return recv(sokt, storage.data, storage.total() * storage.elemSize(), MSG_DONTWAIT); 
 }
 
 
@@ -112,7 +112,7 @@ int Receiver::recvBytes(vector<unsigned char>& storage){
         case 594631: // bytes
             if (int recBytes = recvInt(bytesSize) > 0) {
                 storage.resize(bytesSize);
-                int result = recv(sokt, storage.data(), bytesSize, MSG_WAITALL);
+                int result = recv(sokt, storage.data(), bytesSize, MSG_DONTWAIT);
                 if (result == bytesSize) {                
                     std::cout << "received number of bytes: " << result << std::endl;
                     //sendInt(bytesSize); //send confirmation of received

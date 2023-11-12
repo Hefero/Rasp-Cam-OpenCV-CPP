@@ -62,20 +62,20 @@ Transmitter::Transmitter(int argc, char** argv)
 }
 
 int Transmitter::sendInt(int value){
-    return send(remoteSocket, &value, sizeof(value), MSG_WAITALL); 
+    return send(remoteSocket, &value, sizeof(value), MSG_DONTWAIT); 
 }
 int Transmitter::sendMat(Mat img){
-    return send(remoteSocket, img.data, img.total() * img.elemSize(), MSG_WAITALL); 
+    return send(remoteSocket, img.data, img.total() * img.elemSize(), MSG_DONTWAIT); 
 }
 int Transmitter::sendBytes(vector<unsigned char> compressed){
     sendInt(594631);
     sendInt(compressed.size());
-    return send(remoteSocket, compressed.data(), compressed.size(), MSG_WAITALL); 
+    return send(remoteSocket, compressed.data(), compressed.size(), MSG_DONTWAIT); 
 }
 int Transmitter::sendString(string dataToSend){
     sendInt(866685);
     sendInt(dataToSend.size());
-    return send(remoteSocket,dataToSend.c_str(),dataToSend.size(),MSG_WAITALL); // Send the string 
+    return send(remoteSocket,dataToSend.c_str(),dataToSend.size(),MSG_DONTWAIT); // Send the string 
                                                             
 }
 int Transmitter::recvString(string& storage){
@@ -123,11 +123,11 @@ int Transmitter::recvString(string& storage){
 }
 
 int Transmitter::recvInt(int& storage){
-    return recv(remoteSocket, &storage, sizeof storage, MSG_WAITALL);
+    return recv(remoteSocket, &storage, sizeof storage, MSG_DONTWAIT);
 }
 
 int Transmitter::recvMat(Mat& storage){
-    return recv(remoteSocket, storage.data, storage.total() * storage.elemSize(), MSG_WAITALL); 
+    return recv(remoteSocket, storage.data, storage.total() * storage.elemSize(), MSG_DONTWAIT); 
 }
 
 int Transmitter::recvBytes(vector<unsigned char>& storage){
@@ -142,7 +142,7 @@ int Transmitter::recvBytes(vector<unsigned char>& storage){
         case 594631: // bytes
             if (int recBytes = recvInt(bytesSize) > 0) {
                 storage.resize(bytesSize);
-                int result = recv(remoteSocket, storage.data(), bytesSize, MSG_WAITALL);
+                int result = recv(remoteSocket, storage.data(), bytesSize, MSG_DONTWAIT);
                 if (result == bytesSize) {                
                     std::cout << "received number of bytes: " << result << std::endl;
                     //sendInt(bytesSize); //send confirmation of received
