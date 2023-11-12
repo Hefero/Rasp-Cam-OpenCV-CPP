@@ -96,7 +96,7 @@ void sendFollow(Receiver& rec, Mat& frame, std::vector<Rect>& faces)
         if (30 < faces[0].width < 100){
             int Xrect = faces[0].x - faces[0].width/2;
             int Xcenter = 240;
-            int epsilon = 50;
+            int epsilon = 25;
             if (abs(Xrect - Xcenter) < epsilon){ // está ao centro
                 std::cout << "Centro" << std::endl;
                 rec.sendString("b2");
