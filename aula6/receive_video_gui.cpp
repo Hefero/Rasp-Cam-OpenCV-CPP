@@ -41,19 +41,19 @@ int key = 0;
 auto start = std::chrono::high_resolution_clock::now();
 auto end = std::chrono::high_resolution_clock::now();
 
-    
+rec.sendString("Keep Alive");
  while (key != 'q') {
     try{
         gui.guiLoop();
-        sendCommand(rec, gui);
+        
         if (rec.recvBytes(compressed) > 0){
             img = imdecode(compressed,1);
+            detectAndDisplay(img, faces);
+            //rec.sendString("Keep Alive");
+            sendFollow(rec, img, faces);
+            //concatImg = grudaH(gui.a,img);        
+            imshow("janela",img);
         }
-
-        detectAndDisplay(img, faces);
-        //sendFollow(rec, img, faces);
-        concatImg = grudaH(gui.a,img);        
-        imshow("janela",img);
     }
     catch(cv::Exception ex){
             continue;
@@ -92,25 +92,32 @@ void detectAndDisplay( Mat& frame, std::vector<Rect>& faces )
 
 void sendFollow(Receiver& rec, Mat& frame, std::vector<Rect>& faces)
 {
-    if (30 < faces[0].width < 100){
-        int Xrect = faces[0].x + faces[0].width/2;
-        int Xcenter = 240;
-        int epsilon = 10;
-
-        if ((Xrect - Xcenter) < epsilon){ // está ao centro
-            //rec.sendString("b2");
+    if(faces.size() > 0){
+        if (30 < faces[0].width < 100){
+            int Xrect = faces[0].x - faces[0].width/2;
+            int Xcenter = 240;
+            int epsilon = 50;
+            if (abs(Xrect - Xcenter) < epsilon){ // está ao centro
+                std::cout << "Centro" << std::endl;
+                rec.sendString("b2");
+            }
+            else{
+                if (Xrect > (Xcenter + epsilon)){ // está a direita
+                std::cout << "Direita" << std::endl;
+                rec.sendString("b7");
+                }
+                if (Xrect < (Xcenter - epsilon)){ // está a esquerda
+                std::cout << "Esquerda" << std::endl;
+                rec.sendString("b1");
+                }
+            }
         }
-        else{
-            if (Xrect > (Xcenter + epsilon)){ // está a direita
-              //rec.sendString("b1");
-            }
-            if (Xrect < (Xcenter - epsilon)){ // está a esquerda
-              //rec.sendString("b7");
-            }
+        else {
+            rec.sendString("stop");
         }
     }
     else {
-        rec.sendString("stop");
+            rec.sendString("stop");
     }
 }
 
